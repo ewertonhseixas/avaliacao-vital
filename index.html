@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliação Vital - Biomecânica</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Fixed Top Section -->
+        <div class="fixed-top">
+            <header>
+                <h1>AVALIAÇÃO VITAL</h1>
+                <p class="subtitle">Sistema de Automação Biomecânica</p>
+            </header>
+
+            <div id="nav-container" class="nav-grid hidden">
+                <div class="btn-nav active" onclick="app.switchTab('lat')" id="nav-lat">
+                    <i class="fas fa-arrows-alt-h"></i>
+                    <span>Lat.</span>
+                </div>
+                <div class="btn-nav" onclick="app.switchTab('post')" id="nav-post">
+                    <i class="fas fa-arrows-alt-v"></i>
+                    <span>Post.</span>
+                </div>
+                <div class="btn-nav" onclick="app.switchTab('sd')" id="nav-sd">
+                    <i class="fas fa-shoe-prints"></i>
+                    <span>Step Down</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Registration Section -->
+        <section id="registration" class="card">
+            <div class="form-group">
+                <label for="athlete-name">Nome do Atleta</label>
+                <input type="text" id="athlete-name" placeholder="Ex: João Silva">
+            </div>
+            <div class="form-group">
+                <label for="exam-date">Data da Avaliação</label>
+                <input type="date" id="exam-date">
+            </div>
+            <button class="btn-primary" onclick="app.startAssessment()">Iniciar Avaliação</button>
+        </section>
+
+        <!-- Main Assessment Section -->
+        <section id="assessment-main" class="hidden">
+            <!-- LAT View -->
+            <div id="tab-lat" class="card tab-content">
+                <h3 style="margin-bottom: 1.5rem;"><i class="fas fa-arrows-alt-h"
+                        style="color:var(--primary-color); margin-right: 10px;"></i> Vista Lateral</h3>
+                <div class="form-group">
+                    <label>Inclinação Anterior do Tronco (°)</label>
+                    <input type="number" data-measure="trunk_anterior" placeholder="Ângulo">
+                </div>
+                <div class="form-group">
+                    <label>Flexão do Quadril (°)</label>
+                    <input type="number" data-measure="hip_flexion" placeholder="Ângulo">
+                </div>
+                <div class="form-group">
+                    <label>Extensão do Quadril (°)</label>
+                    <input type="number" data-measure="hip_extension" placeholder="Ângulo">
+                </div>
+                <div class="form-group">
+                    <label>Flexão do Joelho (°)</label>
+                    <input type="number" data-measure="knee_flexion" placeholder="Ângulo">
+                </div>
+                <div class="form-group">
+                    <label>Extensão do Joelho (°)</label>
+                    <input type="number" data-measure="knee_extension" placeholder="Ângulo">
+                </div>
+            </div>
+
+            <!-- POST View -->
+            <div id="tab-post" class="card tab-content hidden">
+                <h3 style="margin-bottom: 1.5rem;"><i class="fas fa-arrows-alt-v"
+                        style="color:var(--primary-color); margin-right: 10px;"></i> Vista Posterior</h3>
+                <div class="form-group">
+                    <label>Inclinação Lateral do Tronco (°)</label>
+                    <input type="number" data-measure="trunk_lateral_post" placeholder="Ângulo">
+                </div>
+                <div class="form-group">
+                    <label>Queda da Pelve (°)</label>
+                    <input type="number" data-measure="pelvis_drop_post" placeholder="Ângulo">
+                </div>
+                <div class="form-group">
+                    <label>Valgo do Joelho (°)</label>
+                    <input type="number" data-measure="knee_valgus_post" placeholder="Ângulo">
+                </div>
+            </div>
+
+            <!-- SD View -->
+            <div id="tab-sd" class="card tab-content hidden">
+                <h3 style="margin-bottom: 1.5rem;"><i class="fas fa-shoe-prints"
+                        style="color:var(--primary-color); margin-right: 10px;"></i> Step Down</h3>
+                <div class="form-group">
+                    <label>Inclinação Lateral do Tronco (°)</label>
+                    <input type="number" data-measure="trunk_lateral_sd" placeholder="Ângulo">
+                </div>
+                <div class="form-group">
+                    <label>Queda da Pelve (°)</label>
+                    <input type="number" data-measure="pelvis_drop_sd" placeholder="Ângulo">
+                </div>
+                <div class="form-group">
+                    <label>Valgo do Joelho (°)</label>
+                    <input type="number" data-measure="knee_valgus_sd" placeholder="Ângulo">
+                </div>
+            </div>
+
+            <!-- Fixed Footer for Action -->
+            <div class="fixed-bottom">
+                <button class="btn-primary" onclick="app.generateReport()">Gerar Relatório</button>
+            </div>
+        </section>
+
+        <!-- Report Section -->
+        <section id="report-view" class="hidden">
+            <div class="card">
+                <div id="report-header"
+                    style="text-align:center; padding-bottom: 2rem; border-bottom: 1px solid var(--glass-border);">
+                    <h2 id="report-athlete">NOME DO ATLETA</h2>
+                    <p id="report-date" style="color: var(--text-muted);">Data: --/--/----</p>
+                </div>
+
+                <div id="report-results">
+                    <!-- Results will be injected here -->
+                </div>
+
+                <button class="btn-primary"
+                    style="margin-top: 3rem; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border);"
+                    onclick="app.reset()">Nova Avaliação</button>
+            </div>
+        </section>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
