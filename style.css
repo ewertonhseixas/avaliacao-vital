@@ -32,7 +32,7 @@ body {
 .container {
     max-width: 900px;
     margin: 0 auto;
-    padding: 120px 1rem 100px 1rem;
+    padding: 180px 1rem 120px 1rem;
     /* Added padding for fixed header/footer */
 }
 
@@ -135,7 +135,7 @@ header .subtitle {
 
 /* Adjust Registration padding */
 #registration {
-    margin-top: -40px;
+    margin-top: 0;
 }
 
 /* Form Styles */
